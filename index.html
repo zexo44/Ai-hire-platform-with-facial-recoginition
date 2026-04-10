@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeriHire AI – Smart Interview Analyzer</title>
+    <meta name="description" content="VeriHire AI — Production-grade AI interview platform with real-time WebRTC, deepfake detection, and behavioral analysis.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- face-api.js for real-time face detection & expression recognition -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.12/dist/face-api.js"></script>
+</head>
+<body>
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- 0. THE CRAZY ANIMATED PROMOTIONAL LANDING PAGE -->
+    <div id="landing-page" class="landing-page">
+        <!-- Navigation -->
+        <nav class="landing-nav reveal reveal-down delay-1">
+            <div class="logo flex-align">
+                <i data-lucide="shield-check" class="text-primary mr-2" style="width:28px; height:28px;"></i>
+                <span style="font-size: 1.5rem; font-weight: 700;">VeriHire <span class="text-primary">AI</span></span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#testimonials">Testimonials</a>
+                <button class="btn-outline btn-sm cta-login-btn">Login</button>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="badge-pill reveal reveal-up delay-2">🔥 The Future of Tech Hiring</div>
+                <h1 class="hero-title reveal reveal-up delay-3">
+                    Hire with Precision.<br>
+                    <span class="text-gradient pulse-bg">Hire with AI.</span>
+                </h1>
+                <p class="hero-subtitle reveal reveal-up delay-4">
+                    Instantly analyze technical skills, emotional intelligence, and candidate authenticity with our state-of-the-art WebRTC dual-camera engine.
+                </p>
+                <div class="hero-actions reveal reveal-up delay-5">
+                    <button class="btn-primary btn-lg btn-shimmer cta-login-btn">
+                        Get Started for Free <i data-lucide="arrow-right"></i>
+                    </button>
+                    <button class="btn-outline btn-lg" style="margin-left: 1rem;">View Demo</button>
+                </div>
+            </div>
+            
+            <div class="hero-visual reveal reveal-scale delay-6">
+                <!-- Abstract floating UI elements -->
+                <div class="glass-floating float-1"><i data-lucide="scan-face" class="text-primary"></i> 99.8% Identity Verified</div>
+                <div class="glass-floating float-2"><i data-lucide="brain-circuit" class="text-success"></i> Deep AI Parsing Active</div>
+                <div class="glass-floating float-3"><i data-lucide="mic" class="text-warning"></i> Speech Context Mapped</div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+            <div class="section-title reveal reveal-up">
+                <h2>Beyond Regular Interviews</h2>
+                <p class="text-muted">Tools designed to completely eliminate hiring bias and spoofing.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal reveal-up delay-1">
+                    <div class="feature-icon mb-3 text-primary"><i data-lucide="video" style="width:36px; height:36px;"></i></div>
+                    <h3>Secure Real-Time Rooms</h3>
+                    <p class="text-muted">Encrypted peer-to-peer WebRTC rooms with STUN/TURN servers for reliable connections behind any firewall.</p>
+                </div>
+                <div class="feature-card reveal reveal-up delay-2">
+                    <div class="feature-icon mb-3 text-success"><i data-lucide="scan" style="width:36px; height:36px;"></i></div>
+                    <h3>Real-Time Face Detection</h3>
+                    <p class="text-muted">AI-powered face detection with expression recognition, multi-face alerts, and gaze tracking — all processed locally in-browser.</p>
+                </div>
+                <div class="feature-card reveal reveal-up delay-3">
+                    <div class="feature-icon mb-3 text-warning"><i data-lucide="zap" style="width:36px; height:36px;"></i></div>
+                    <h3>Anti-Cheat Proctoring</h3>
+                    <p class="text-muted">Tab-switch counting, clipboard monitoring, DevTools detection, and fullscreen enforcement — every violation is logged and scored.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials (Wall of Love) -->
+        <section id="testimonials" class="testimonials-section">
+            <div class="section-title reveal reveal-up">
+                <h2>The Wall of <span class="text-gradient">Love</span></h2>
+                <p class="text-muted">See why top-tier enterprise teams trust us implicitly.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal reveal-zoom">
+                    <div class="stars text-warning mb-2">★★★★★</div>
+                    <p class="quote">"VeriHire is pure magic. We cut our technical interviewing pipeline by 60%, and the quality of hires went *up*. It's a genuine competitive advantage."</p>
+                    <div class="author mt-4 flex-align">
+                        <div class="avatar bg-primary text-invert">S</div>
+                        <div class="author-details" style="margin-left: 0.75rem;">
+                            <div class="font-semibold">Sarah Jenkins</div>
+                            <div class="text-sm text-muted">VP of Engineering, CloudScale</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal reveal-zoom delay-1">
+                    <div class="stars text-warning mb-2">★★★★★</div>
+                    <p class="quote">"Before VeriHire, we had two mis-hires who used ChatGPT to pass technical screens. Since adopting this platform, our authenticity rating is perfectly accurate."</p>
+                    <div class="author mt-4 flex-align">
+                        <div class="avatar bg-success text-invert">M</div>
+                        <div class="author-details" style="margin-left: 0.75rem;">
+                            <div class="font-semibold">Marcus Do</div>
+                            <div class="text-sm text-muted">Lead Recruiter, FintechOS</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal reveal-zoom delay-2">
+                    <div class="stars text-warning mb-2">★★★★★</div>
+                    <p class="quote">"The UI is gorgeous. The realtime websocket transcription piped directly into Gemini blows my mind every time. Pure joy to use as an interviewer."</p>
+                    <div class="author mt-4 flex-align">
+                        <div class="avatar bg-warning text-invert">A</div>
+                        <div class="author-details" style="margin-left: 0.75rem;">
+                            <div class="font-semibold">Alex Rivera</div>
+                            <div class="text-sm text-muted">Principal Architect, Nexus</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bottom-cta reveal reveal-up" style="text-align: center; margin-top: 6rem; padding-bottom: 4rem;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Ready to upgrade your hiring?</h2>
+                <button class="btn-primary btn-lg btn-shimmer cta-login-btn mx-auto" style="font-size: 1.25rem; padding: 1.25rem 2.5rem;">
+                    Enter VeriHire Platform <i data-lucide="arrow-right"></i>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- 1. The Animated Premium Entry Portal -->
+    <div id="welcome-screen" class="welcome-overlay" style="display: none;">
+        <div class="login-card glass-panel" id="login-card">
+            <div class="login-header">
+                <div class="logo-circle pulsing">
+                    <i data-lucide="shield-check" style="width: 36px; height: 36px; color: var(--primary);"></i>
+                </div>
+                <h1>VeriHire <span class="text-primary">AI</span></h1>
+                <p class="text-muted">Authentication Portal</p>
+            </div>
+            <form id="login-form" class="mt-4">
+                <div class="form-group">
+                    <label>Enterprise ID</label>
+                    <div class="input-with-icon login-input">
+                        <i data-lucide="user"></i>
+                        <input type="text" value="admin@verihire.ai" readonly>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <label>Access Token</label>
+                    <div class="input-with-icon login-input">
+                        <i data-lucide="key"></i>
+                        <input type="password" value="********" readonly>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary w-100 mt-5 btn-shimmer" id="btn-login" style="justify-content: center; padding: 1rem; font-size: 1.1rem; height: auto;">
+                    Authorize Access <i data-lucide="arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Candidate Pre-Check Lobby -->
+    <div id="candidate-lobby" class="candidate-lobby" style="display: none;">
+        <div class="lobby-card card reveal reveal-up">
+            <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Authenticity Pre-Check</h2>
+            <p class="text-muted">Enter the waiting room for your technical interview.</p>
+            
+            <div class="hardware-check">
+                <div class="check-row text-sm">
+                    <span class="flex-align"><i data-lucide="camera" class="text-primary mr-2" style="width:20px;"></i> Video Feed</span>
+                    <span class="text-success font-semibold" id="lobby-video-status">Checking...</span>
+                </div>
+                <div class="check-row text-sm mt-3">
+                    <span class="flex-align"><i data-lucide="mic" class="text-warning mr-2" style="width:20px;"></i> Audio Sync</span>
+                    <span class="text-success font-semibold" id="lobby-audio-status">Checking...</span>
+                </div>
+                <div class="check-row text-sm mt-3">
+                    <span class="flex-align"><i data-lucide="scan-face" class="text-primary mr-2" style="width:20px;"></i> AI Face Detection</span>
+                    <span class="text-primary font-semibold" id="lobby-face-status">Loading Models...</span>
+                </div>
+                <div class="check-row text-sm mt-3">
+                    <span class="flex-align"><i data-lucide="shield" class="text-success mr-2" style="width:20px;"></i> Anti-Cheat Monitor</span>
+                    <span class="text-success font-semibold">Armed</span>
+                </div>
+            </div>
+            
+            <p class="text-sm text-muted mb-4">By joining, you agree to our anti-fraud monitoring policy, including continuous tab-focus and biometric analysis.</p>
+            <button class="btn-primary w-100 btn-shimmer" id="btn-join-room" style="justify-content: center; padding: 1rem; font-size: 1.1rem;">I Agree, Join Interview <i data-lucide="arrow-right"></i></button>
+        </div>
+    </div>
+
+    <!-- 2. Main App Application -->
+    <div class="app-container" id="app-container" style="opacity: 0; transform: scale(0.95); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <i data-lucide="brain-circuit" class="logo-icon text-accent"></i>
+                <span class="logo-text">VeriHire AI</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" id="nav-dashboard"><i data-lucide="layout-dashboard"></i> Manual Input</a>
+                <a href="#" class="nav-item" id="nav-live"><i data-lucide="video"></i> Live Interview</a>
+                <a href="#" class="nav-item" id="nav-admin"><i data-lucide="credit-card"></i> Admin & Billing</a>
+                <a href="#" class="nav-item"><i data-lucide="history"></i> History</a>
+            </nav>
+
+            <div class="upgrade-card">
+                <div class="upgrade-icon"><i data-lucide="zap"></i></div>
+                <h4>Upgrade to Pro</h4>
+                <p>Get unlimited analyses & advanced authenticity insights.</p>
+                <button class="btn-upgrade">Upgrade Now</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-nav">
+                <h1 id="page-title">New Candidate Analysis</h1>
+                <div class="user-profile">
+                    <span class="credits-badge">Free Plan (3 left)</span>
+                    <img src="https://ui-avatars.com/api/?name=HR+User&background=0f172a&color=fff" alt="User">
+                </div>
+            </header>
+
+            <div class="content-body" id="content-body">
+                
+                <!-- 1. Input Form View -->
+                <div class="view-section active" id="input-view">
+                    <div class="form-card">
+                        <div class="form-header">
+                            <h2>Submit Interview Data</h2>
+                            <p class="subtitle">Enter candidate details and responses to generate a premium AI evaluation.</p>
+                        </div>
+                        
+                        <form id="analysis-form">
+                            <div class="form-row">
+                                <div class="form-group flex-1">
+                                    <label for="jobRole">Job Role <span class="required">*</span></label>
+                                    <input type="text" id="jobRole" placeholder="e.g., Senior Product Manager" required value="Senior Platform Engineer">
+                                </div>
+                                <div class="form-group flex-1">
+                                    <label for="toneIndicator">Observed Tone <span class="text-muted">(Optional)</span></label>
+                                    <select id="toneIndicator">
+                                        <option value="">Select an observed tone...</option>
+                                        <option value="confident" selected>Confident & Articulate</option>
+                                        <option value="nervous">Nervous but Clear</option>
+                                        <option value="arrogant">Overconfident / Arrogant</option>
+                                        <option value="unclear">Hesitant / Unclear</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="requiredSkills">Required Skills <span class="text-muted">(Comma-separated)</span> <span class="required">*</span></label>
+                                <input type="text" id="requiredSkills" placeholder="e.g., Python, System Design, Leadership" required value="Node.js, AWS, System Architecture, Team Collaboration">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="candidateAnswers">Candidate Answers <span class="text-muted">(Transcript or detailed summary)</span> <span class="required">*</span></label>
+                                <textarea id="candidateAnswers" rows="8" placeholder="Paste the candidate's core answers or interview transcript here..." required>The candidate mentioned they have 5 years of experience building scalable backend systems. When asked about handling high traffic, they stated: "We typically use Redis for caching and scale our Node pods horizontally. I designed a microservice architecture at my last company." On the behavioral side, they were asked about conflicts, and answered: "I just talk to the person and we sort it out, no big deal. It's usually a misunderstanding."</textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary" id="btn-analyze">
+                                    <i data-lucide="sparkles"></i> Generate Insights
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 4. Live Interview View -->
+                <div class="view-section" id="live-interview-view" style="display: none;">
+                    <div class="form-header">
+                        <h2>Live AI Interview <span class="recording-badge" id="recording-indicator" style="display:none;"><span class="dot pulse"></span> Recording</span></h2>
+                        <p class="subtitle" id="live-subtitle">Conduct the interview with real-time facial and speech analysis.</p>
+                        
+                        <div id="room-controls" style="margin-top: 1rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                            <button id="btn-create-room" class="btn-primary btn-sm"><i data-lucide="plus"></i> Create Room</button>
+                            <span class="badge tag-secondary" id="room-id-display" style="display:none; font-size: 0.9rem; padding: 0.5rem 1rem;"></span>
+                            <button id="btn-copy-link" class="btn-outline btn-sm" style="display:none;"><i data-lucide="copy"></i> Copy Candidate Link</button>
+                            <!-- Connection Status Badge -->
+                            <span class="connection-badge" id="connection-badge" style="display:none;">
+                                <span class="conn-dot"></span>
+                                <span id="connection-text">Connecting...</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="interview-grid" id="main-interview-grid">
+                        <div class="video-container" id="video-container" style="flex-direction: column;">
+                            <!-- Security HUD — Now shows REAL DATA -->
+                            <div class="security-hud" id="security-hud" style="display:none;">
+                                <div class="hud-badge" id="hud-face-badge">
+                                    <div class="status-dot status-green" id="hud-face"></div>
+                                    <span id="hud-face-text">Face: Detecting...</span>
+                                </div>
+                                <div class="hud-badge" id="hud-expression-badge">
+                                    <div class="status-dot status-green" id="hud-expr"></div>
+                                    <span id="hud-expression-text">Expression: Loading...</span>
+                                </div>
+                                <div class="hud-badge" id="hud-focus-badge">
+                                    <div class="status-dot status-green" id="hud-focus"></div>
+                                    <span id="hud-focus-text">Tab Focus: Active</span>
+                                </div>
+                                <div class="hud-badge" id="hud-violations-badge">
+                                    <div class="status-dot status-green" id="hud-viol"></div>
+                                    <span id="hud-violations-text">Violations: 0</span>
+                                </div>
+                                <!-- Network Quality -->
+                                <div class="hud-badge" id="hud-network-badge">
+                                    <div class="network-bars" id="network-bars">
+                                        <div class="net-bar bar-1 active"></div>
+                                        <div class="net-bar bar-2 active"></div>
+                                        <div class="net-bar bar-3 active"></div>
+                                        <div class="net-bar bar-4"></div>
+                                    </div>
+                                    <span id="hud-network-text">Network: Waiting</span>
+                                </div>
+                            </div>
+                            
+                            <video id="remote-video" autoplay playsinline style="display:none; width: 100%; height: 100%; object-fit: cover;"></video>
+                            <video id="webcam-feed" autoplay muted playsinline class="local-pip"></video>
+                            
+                            <div class="facial-overlay" id="facial-overlay" style="display:none; z-index: 20;">
+                                <i data-lucide="scan-face"></i>
+                                <span id="facial-status">Loading AI models...</span>
+                            </div>
+                            <div class="camera-placeholder" id="camera-placeholder" style="z-index: 1;">
+                                <i data-lucide="camera-off"></i>
+                                <p>Waiting for connection...</p>
+                            </div>
+
+                            <!-- Proctoring Alert Flash Overlay -->
+                            <div class="proctoring-alert-overlay" id="proctoring-alert-overlay" style="display:none;">
+                                <div class="alert-content">
+                                    <i data-lucide="alert-triangle"></i>
+                                    <span id="proctoring-alert-text">Violation Detected</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Live IDE -->
+                        <div class="live-ide-container" id="live-ide">
+                            <div class="ide-header">
+                                <div class="file-tab">candidate.js</div>
+                                <span style="margin-left:auto; color:var(--success); display:flex; align-items:center;"><i data-lucide="wifi" style="width:14px; margin-right:4px;"></i> IDE Synced</span>
+                            </div>
+                            <div class="ide-body">
+                                <textarea id="code-editor" class="code-editor" placeholder="// Write or paste interview questions here...&#10;&#10;function reverseBinaryTree(node) {&#10;    // Candidate types here&#10;}"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="interview-panel" id="interview-panel-side">
+                            <div class="card panel-card">
+                                <h3>Setup Details</h3>
+                                <div class="form-group mt-3">
+                                    <label>Job Role</label>
+                                    <input type="text" id="liveJobRole" value="Senior Platform Engineer" class="w-100">
+                                </div>
+                                <div class="form-group">
+                                    <label>Required Skills</label>
+                                    <input type="text" id="liveSkills" value="Node.js, AWS, System Architecture" class="w-100">
+                                </div>
+                                <div class="panel-actions mt-4" style="display:flex; flex-direction:column; gap:0.5rem;">
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button class="btn-primary" style="flex:1; justify-content:center; padding: 0.5rem;" id="btn-start-interview">
+                                            <i data-lucide="play"></i> Start
+                                        </button>
+                                        <button class="btn-outline" style="flex:1; justify-content:center; padding: 0.5rem;" id="btn-toggle-ide">
+                                            <i data-lucide="code"></i> IDE
+                                        </button>
+                                    </div>
+                                    <div style="display: flex; gap: 0.5rem; display:none;" id="active-interview-controls">
+                                        <button class="btn-outline" style="flex:1; justify-content:center; padding: 0.5rem;" id="btn-screen-share">
+                                            <i data-lucide="monitor"></i> Share Screen
+                                        </button>
+                                        <button class="btn-outline" style="flex:1; justify-content:center; padding: 0.5rem;" id="btn-download-recording">
+                                            <i data-lucide="download"></i> Recording
+                                        </button>
+                                    </div>
+                                    <button class="btn-danger w-100" id="btn-end-interview" style="display:none;">
+                                        <i data-lucide="square"></i> End & Analyze
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card panel-card mt-3 transcript-card">
+                                <h3><i data-lucide="mic"></i> Live Transcript</h3>
+                                <div class="transcript-box mt-3 text-sm" id="live-transcript">
+                                    <em class="text-muted">Start the interview to begin transcription...</em>
+                                </div>
+                            </div>
+
+                            <!-- Violation Log Panel (NEW) -->
+                            <div class="card panel-card mt-3 violation-log-card" id="violation-log-card" style="display:none;">
+                                <h3 class="flex-align"><i data-lucide="shield-alert" class="text-danger mr-2" style="width:18px;"></i> Violation Log</h3>
+                                <div class="violation-log mt-3 text-sm" id="violation-log">
+                                    <em class="text-muted">No violations recorded.</em>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proctoring Summary Modal (shown before AI analysis) -->
+                <div class="proctoring-modal-overlay" id="proctoring-modal" style="display:none;">
+                    <div class="proctoring-modal glass-panel">
+                        <div class="modal-header">
+                            <h2><i data-lucide="shield-check" class="text-primary mr-2"></i> Session Integrity Report</h2>
+                            <p class="text-muted">Review proctoring data before generating AI analysis.</p>
+                        </div>
+                        <div class="modal-body">
+                            <div class="integrity-score-display">
+                                <div class="integrity-ring">
+                                    <span class="integrity-number" id="modal-integrity-score">100</span>
+                                    <span class="integrity-label">Integrity</span>
+                                </div>
+                            </div>
+                            <div class="modal-stats-grid" id="modal-stats-grid">
+                                <div class="modal-stat">
+                                    <span class="modal-stat-label">Tab Switches</span>
+                                    <span class="modal-stat-value" id="modal-tab-switches">0</span>
+                                </div>
+                                <div class="modal-stat">
+                                    <span class="modal-stat-label">Copy/Paste</span>
+                                    <span class="modal-stat-value" id="modal-copy-paste">0</span>
+                                </div>
+                                <div class="modal-stat">
+                                    <span class="modal-stat-label">Face Missing</span>
+                                    <span class="modal-stat-value" id="modal-face-absent">0</span>
+                                </div>
+                                <div class="modal-stat">
+                                    <span class="modal-stat-label">Multi-Face</span>
+                                    <span class="modal-stat-value" id="modal-multi-face">0</span>
+                                </div>
+                                <div class="modal-stat">
+                                    <span class="modal-stat-label">DevTools</span>
+                                    <span class="modal-stat-value" id="modal-devtools">0</span>
+                                </div>
+                                <div class="modal-stat">
+                                    <span class="modal-stat-label">Dominant Expression</span>
+                                    <span class="modal-stat-value" id="modal-expression">N/A</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-actions">
+                            <button class="btn-primary btn-lg btn-shimmer" id="btn-proceed-analysis" style="justify-content:center; width: 100%;">
+                                <i data-lucide="sparkles"></i> Proceed to AI Analysis
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Loading View -->
+                <div class="view-section" id="loading-view" style="display: none;">
+                    <div class="loading-state">
+                        <div class="spinner-container">
+                            <div class="spinner"></div>
+                            <i data-lucide="brain-circuit" class="spinner-icon"></i>
+                        </div>
+                        <h2 id="loading-text">Analyzing Candidate Responses...</h2>
+                        <ul class="loading-steps">
+                            <li class="active" id="step-1"><i data-lucide="check-circle-2"></i> Extracting claims & skills</li>
+                            <li id="step-2"><i data-lucide="loader-2" class="spin"></i> Mapping text to behavioral models</li>
+                            <li id="step-3" class="text-muted"><i data-lucide="circle"></i> Running Authenticity & Integrity checks</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 3. Results Dashboard View -->
+                <div class="view-section" id="results-view" style="display: none;">
+                    <div class="results-header">
+                        <div class="title-group">
+                            <h2 id="res-role">Candidate Report</h2>
+                            <div class="tags">
+                                <span class="tag tag-primary"><i data-lucide="briefcase"></i> <span id="res-role-text">Senior Platform Engineer</span></span>
+                                <span class="tag tag-secondary" id="res-date-tag">Today</span>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <button class="btn-outline" onclick="window.print()"><i data-lucide="download"></i> Export PDF</button>
+                            <button class="btn-primary" id="btn-new-analysis"><i data-lucide="plus"></i> New Analysis</button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        
+                        <!-- Top Left: Final Verdict / Score -->
+                        <div class="card result-card score-card">
+                            <div class="card-header">
+                                <h3>Final Verdict</h3>
+                                <i data-lucide="target" class="text-muted"></i>
+                            </div>
+                            <div class="score-container">
+                                <div class="score-ring">
+                                    <svg viewBox="0 0 36 36" class="circular-chart green shadow-glow">
+                                      <path class="circle-bg"
+                                        d="M18 2.0845
+                                          a 15.9155 15.9155 0 0 1 0 31.831
+                                          a 15.9155 15.9155 0 0 1 0 -31.831"
+                                      />
+                                      <path class="circle" id="score-circle-path"
+                                        stroke-dasharray="85, 100"
+                                        d="M18 2.0845
+                                          a 15.9155 15.9155 0 0 1 0 31.831
+                                          a 15.9155 15.9155 0 0 1 0 -31.831"
+                                      />
+                                      <text x="18" y="20.35" class="percentage" id="res-score">85</text>
+                                    </svg>
+                                </div>
+                                <div class="score-details">
+                                    <h4 id="res-recommendation" class="decision-hire">Strong Hire</h4>
+                                    <p class="confidence-level"><i data-lucide="activity"></i> Confidence: <strong id="res-confidence">High</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Top Right: Candidate Summary -->
+                        <div class="card result-card summary-card md-col-span-2">
+                            <div class="card-header">
+                                <h3>Executive Summary</h3>
+                                <i data-lucide="file-text" class="text-muted"></i>
+                            </div>
+                            <p class="summary-text" id="res-summary">...</p>
+                            
+                            <div class="mt-4 border-t pt-4">
+                                <h4 class="text-sm uppercase text-muted mb-2 font-semibold"><i data-lucide="graduation-cap" class="mr-2" style="width:16px;"></i> Background Check</h4>
+                                <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                                    <div><strong>Degree:</strong> <span id="res-degree">...</span></div>
+                                    <div><strong>Experience:</strong> <span id="res-experience">...</span></div>
+                                    <div><strong>Past Companies:</strong> <span id="res-companies">...</span></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 border-t pt-4">
+                                <h4 class="text-sm uppercase text-primary mb-2 font-semibold flex-align"><i data-lucide="thumbs-up" class="mr-2" style="width:18px;"></i> Why We Should Hire</h4>
+                                <p class="summary-text text-primary" style="background: var(--accent-light); padding: 1.25rem; border-radius: 8px; font-weight: 500;" id="res-hire-sheet">...</p>
+                            </div>
+                        </div>
+
+                        <!-- Authenticity & Integrity Analysis -->
+                        <div class="card result-card md-col-span-3 integrity-card shadow-lg">
+                            <div class="card-header">
+                                <div class="flex-align">
+                                    <i data-lucide="shield-alert" class="text-primary mr-2"></i>
+                                    <h3>Authenticity & Integrity Analysis</h3>
+                                </div>
+                                <span class="badge" id="auth-verdict-badge">Authentic</span>
+                            </div>
+                            <div class="auth-grid">
+                                <div class="auth-item">
+                                    <span class="auth-label">Response Nature</span>
+                                    <strong id="auth-nature" class="auth-val">Fully Genuine</strong>
+                                </div>
+                                <div class="auth-item">
+                                    <span class="auth-label">Consistency Check</span>
+                                    <strong id="auth-consistency" class="auth-val">Consistent Throughout</strong>
+                                </div>
+                                <div class="auth-item">
+                                    <span class="auth-label">Depth / Surface</span>
+                                    <strong id="auth-depth" class="auth-val">Deep Understanding</strong>
+                                </div>
+                                <div class="auth-item risk-item">
+                                    <span class="auth-label">AI Risk Score</span>
+                                    <div class="flex-align">
+                                        <span class="risk-number" id="auth-risk-score">10</span>
+                                        <span class="text-sm">/ 100</span>
+                                    </div>
+                                    <div class="impact-bar"><div class="impact-fill bg-success" id="auth-risk-fill" style="width: 10%"></div></div>
+                                </div>
+                            </div>
+                            <div class="auth-details mt-4 box-alert">
+                                <div><i data-lucide="radar"></i> <strong>Detection Signals:</strong> <span id="auth-signals">None. Natural phrasing.</span></div>
+                                <div class="mt-2"><i data-lucide="mic"></i> <strong>Behavioral Indicator:</strong> <span id="auth-behavior">Matches content perfectly.</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Middle Left: Skill Match -->
+                        <div class="card result-card skills-card md-col-span-2">
+                            <div class="card-header">
+                                <h3>Skill Match Analysis</h3>
+                                <i data-lucide="layers" class="text-muted"></i>
+                            </div>
+                            <div class="skills-list" id="res-skills">
+                                <!-- JS injected -->
+                            </div>
+                        </div>
+
+                        <!-- Middle Right: Behavior & Comm -->
+                        <div class="card result-card behavior-card">
+                            <div class="card-header">
+                                <h3>Behavioral & Comm.</h3>
+                                <i data-lucide="message-square" class="text-muted"></i>
+                            </div>
+                            <div class="comm-stats mt-3" id="res-comm">
+                                <!-- JS injected -->
+                            </div>
+                            <div class="mt-4 border-t pt-4">
+                                <h4 class="text-sm uppercase text-muted mb-2 font-semibold">Psychological Profile</h4>
+                                <ul class="bulleted-list text-sm" id="res-behavioral">
+                                    <!-- JS injected -->
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Bottom: Strengths / Weaknesses -->
+                        <div class="card result-card strength-card bg-green-light shadow-sm border-success">
+                            <div class="card-header text-success">
+                                <h3 class="flex-align"><i data-lucide="trending-up" class="mr-2"></i> Key Strengths</h3>
+                            </div>
+                            <ul class="check-list mt-3 text-sm" id="res-strengths">
+                                <!-- JS injected -->
+                            </ul>
+                        </div>
+
+                        <div class="card result-card warning-card bg-red-light shadow-sm border-danger">
+                            <div class="card-header text-danger">
+                                <h3 class="flex-align"><i data-lucide="alert-triangle" class="mr-2"></i> Red Flags</h3>
+                            </div>
+                            <ul class="cross-list mt-3 text-sm" id="res-redflags">
+                                <!-- JS injected -->
+                            </ul>
+                        </div>
+
+                        <!-- Follow Up Questions -->
+                        <div class="card result-card md-col-span-3">
+                            <div class="card-header">
+                                <h3>Suggested Follow-up Questions</h3>
+                                <i data-lucide="help-circle" class="text-muted"></i>
+                            </div>
+                            <div class="questions-list mt-3" id="res-questions">
+                                <!-- JS injected -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 5. Admin & Billing View -->
+                <div class="view-section" id="admin-view" style="display: none;">
+                    <div class="results-header">
+                        <div class="title-group">
+                            <h2>Admin & Billing Dashboard</h2>
+                            <p class="subtitle text-muted">Manage your workspace and subscription.</p>
+                        </div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="card result-card">
+                            <div class="card-header">
+                                <h3>Current Plan</h3>
+                                <span class="badge authentic bg-success">Active</span>
+                            </div>
+                            <h2 class="mt-2 text-primary">Pro Tier</h2>
+                            <p class="text-sm text-muted mt-2">$49.00 / month. Next billing date: Apr 30, 2026.</p>
+                            <button class="btn-outline mt-3 w-100" style="justify-content: center;"><i data-lucide="external-link"></i> Manage Billing</button>
+                        </div>
+                        <div class="card result-card">
+                            <div class="card-header">
+                                <h3>Total Interviews</h3>
+                                <i data-lucide="users" class="text-muted"></i>
+                            </div>
+                            <h2 class="mt-2" id="admin-total-interviews">14</h2>
+                            <p class="text-sm text-success mt-2 flex-align"><i data-lucide="trending-up" class="mr-2"></i> +3 this week</p>
+                        </div>
+                        <div class="card result-card">
+                            <div class="card-header">
+                                <h3>API Usage</h3>
+                                <i data-lucide="database" class="text-muted"></i>
+                            </div>
+                            <h2 class="mt-2">1,240 / 5,000</h2>
+                            <p class="text-sm text-muted mt-2">AI minutes consumed.</p>
+                            <div class="impact-bar mt-2"><div class="impact-fill bg-success" style="width: 25%"></div></div>
+                        </div>
+                        <div class="card result-card md-col-span-3">
+                            <div class="card-header">
+                                <h3>Recent Activity</h3>
+                            </div>
+                            <table style="width: 100%; text-align: left; margin-top: 1rem; border-collapse: collapse; font-size: 0.95rem;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid var(--border); color: var(--text-muted);">
+                                        <th style="padding: 0.75rem 0;">Date</th>
+                                        <th>Candidate ID</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px dashed var(--border-light);">
+                                        <td style="padding: 1rem 0;">Mar 30, 2026</td>
+                                        <td class="font-semibold text-primary">#room-abc-123</td>
+                                        <td>Senior Platform Engineer</td>
+                                        <td><span class="text-success font-semibold flex-align"><i data-lucide="check-circle" class="mr-2" style="width:16px;"></i> Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 1rem 0;">Mar 28, 2026</td>
+                                        <td class="font-semibold text-primary">#room-xyz-456</td>
+                                        <td>Frontend Dev</td>
+                                        <td><span class="text-success font-semibold flex-align"><i data-lucide="check-circle" class="mr-2" style="width:16px;"></i> Completed</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts: Order matters — dependencies first -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="webrtc.js"></script>
+    <script src="proctoring.js"></script>
+    <script src="aiEngine.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
